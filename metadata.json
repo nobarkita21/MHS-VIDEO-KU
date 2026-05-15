@@ -1,0 +1,10 @@
+{
+  "name": "Extreme Video Gallery & Admin Platform",
+  "description": "A high-end video and image gallery with Telegram storage, real-time Firestore synchronization, and an advanced admin dashboard.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone",
+    "geolocation"
+  ],
+  "majorCapabilities": []
+}

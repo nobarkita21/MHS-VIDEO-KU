@@ -1,0 +1,76 @@
+{
+  "entities": {
+    "Post": {
+      "title": "Gallery Post",
+      "description": "A video or image post stored in Telegram and tracked in Firestore",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "type": { "type": "string", "enum": ["image", "video"] },
+        "mediaUrl": { "type": "string" },
+        "thumbnailUrl": { "type": "string" },
+        "telegramFileId": { "type": "string" },
+        "categoryId": { "type": "string" },
+        "userId": { "type": "string" },
+        "views": { "type": "number" },
+        "likesCount": { "type": "number" },
+        "commentsCount": { "type": "number" },
+        "status": { "type": "string", "enum": ["published", "private"] },
+        "badge": { "type": "string", "enum": ["none", "new", "viral", "trending"] },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["title", "type", "userId", "categoryId"]
+    },
+    "User": {
+      "title": "User Profile",
+      "description": "Extended user information and roles",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "email": { "type": "string" },
+        "displayName": { "type": "string" },
+        "photoURL": { "type": "string" },
+        "role": { "type": "string", "enum": ["owner", "admin", "volunteer", "relawan", "user"] },
+        "isBanned": { "type": "boolean" },
+        "isVerified": { "type": "boolean" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      }
+    },
+    "Category": {
+      "title": "Category",
+      "description": "Post categories",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "slug": { "type": "string" }
+      }
+    }
+  },
+  "firestore": {
+    "/posts/{postId}": {
+      "schema": "Post",
+      "description": "Collection of video and image posts"
+    },
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User profiles and roles"
+    },
+    "/categories/{categoryId}": {
+      "schema": "Category",
+      "description": "Video/Image categories"
+    },
+    "/settings/config": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "siteName": { "type": "string" },
+          "logoUrl": { "type": "string" },
+          "maintenanceMode": { "type": "boolean" },
+          "maintenanceMessage": { "type": "string" }
+        }
+      },
+      "description": "Global application configuration"
+    }
+  }
+}
